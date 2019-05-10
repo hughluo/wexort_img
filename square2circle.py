@@ -9,6 +9,7 @@ def rect2square(image_path):
     w, h = img.size
     img.crop
 
+
 def square2circle(image_path):
 
     img = Image.open(image_path)

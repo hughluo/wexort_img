@@ -3,16 +3,22 @@ from math import sqrt
 from sys import argv
 
 
-def rect2square(image_path):
+def rect2square(img):
 
-    img = Image.open(image_path)
     w, h = img.size
-    img.crop
+    if w > h:
+        print('w', w, 'h', h)
+        padding = (w - h) / 2
+        cropped_img = img.crop((padding, 0, padding + h, h))
+    else:
+        padding = (h - w) / 2
+        cropped_img = img.crop((0, padding, w, padding + w))
+
+    return cropped_img
 
 
-def square2circle(image_path):
+def square2circle(img):
 
-    img = Image.open(image_path)
     if not img.size[0] == img.size[1]:
         raise SystemExit('Input Image is not square')
     else:
@@ -29,13 +35,28 @@ def square2circle(image_path):
 
     # img.show()
     # out_path = image_path.split('.')[0] + '_out.png'
-    out_path = 'output.png'
-    img.save(out_path, "PNG")
+    return img
+
+
+def rect2circle(img):
+
+    return square2circle(rect2square(img))
 
 
 def main():
-    img_path = 'input.jpg'
-    square2circle(img_path)
+    try:
+        in_img = Image.open('input.png')
+    except FileNotFoundError:
+        try:
+            in_img = Image.open('input.jpg')
+        except FileNotFoundError:
+            raise SystemExit('No file named input.png or input.jpg')
+
+    out_path = 'output.png'
+    # in_img = Image.open(in_path)
+    out_img = rect2circle(in_img)
+    # out_img.show()
+    out_img.save(out_path, "PNG")
 
 
 if __name__ == '__main__':

@@ -7,7 +7,6 @@ def rect2square(img):
 
     w, h = img.size
     if w > h:
-        print('w', w, 'h', h)
         padding = (w - h) / 2
         cropped_img = img.crop((padding, 0, padding + h, h))
     else:

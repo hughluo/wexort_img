@@ -27,7 +27,7 @@ def square2circle(img):
         center_plot = int((img.size[0]) / 2)
 
         for i in range(img.size[0]):    # for every col:
-            for j in range(img.size[1]):    # For every row
+            for j in range(img.size[1]):    # for every row
                 distance = sqrt((i - center_plot) ** 2 + (j - center_plot) ** 2)
                 if distance > center_plot:
                     pixels[i,j] = (255, 255, 255, 0) # set the colour accordingly
